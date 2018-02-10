@@ -17,14 +17,14 @@ nb_classes = np.shape(pd.read_csv("signnames.csv"))[0]
 X, y = train['features'], train['labels']
 
 # Split data into Training and test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 num_examples = len(X_train)
 
 #print(np.shape(X_train))
 
 # Define placeholder and resize operation.
 
-x = tf.placeholder(tf.float32, (None, 32, 32, 1))
+x = tf.placeholder(tf.float32, (None, 32, 32, 3))
 y = tf.placeholder(tf.int64, None)
 keep_prob = tf.placeholder(tf.float32)
 x_resized = tf.image.resize_images(x, (227,227))
@@ -80,7 +80,7 @@ def evaluate(X_data, y_data):
         total_accuracy += (accuracy * len(batch_x))
     return total_accuracy / num_examples
 
-# TODO: Train and evaluate the feature extraction model.
+# Train and evaluate the feature extraction model.
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
