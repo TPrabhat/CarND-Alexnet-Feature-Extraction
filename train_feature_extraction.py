@@ -61,7 +61,7 @@ loss_operation = tf.reduce_mean(cross_entropy)
 optimizer = tf.train.AdamOptimizer(learning_rate = rate)
 training_operation = optimizer.minimize(loss_operation, var_list=[fc8_W, fc8_b])
 
-correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(y, 1))
+correct_prediction = tf.equal(tf.argmax(logits, 1), y)
 accuracy_operation = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 
